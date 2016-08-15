@@ -11,7 +11,7 @@ def hello():
     fontColor = calContrastColor(bgColor)
     css = """<head><style>
              body{
-                 background-color: #"""+str(bgColor)[2:]+""";
+                 background-color: #"""+hex2Str(bgColor)+""";
                  }
              h1,h2 {
                  color: #"""+fontColor+""";
@@ -34,6 +34,15 @@ def hostName2ColorHex(hostName):
 contractThreshold = hex(0xffffff/2)
 def calContrastColor(colorHex):
     return '000000' if colorHex > contractThreshold else 'ffffff'
+
+def hex2Str(colorHex):
+    colorStr= str(colorHex)[2:]
+    while len(colorStr)<6:
+        colorStr='0'+colorStr
+    if len(colorStr)>6:
+        colorStr=colorStr[0:6]
+        
+    return colorStr
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
