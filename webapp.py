@@ -1,9 +1,13 @@
 from flask import Flask
+from healthcheck import HealthCheck
 from datetime import datetime
 import socket, sys, math
 
 app = Flask(__name__)
 app.debug = True
+
+health = HealthCheck(app, "/health")
+
 @app.route("/")
 def hello():
     hostName = socket.gethostname()
